@@ -1,0 +1,36 @@
+---
+- name: Ansible playbook for installing the flutter dev env
+  hosts: localhost
+  user: root
+  tasks:
+    - name: Run "apt-get update"
+      apt:
+        update_cache: yes
+
+    - name: install python
+      command: apt install -y python3 python3-apt
+
+    - name: install flutter dependencies
+      apt:
+        pkg:
+        - curl
+        - git
+        - zip
+        - unzip
+        - xz-utils
+        install_recommends: no
+
+    - name: Get Flutter sources
+      ansible.builtin.git:
+        repo: https://github.com/flutter/flutter.git
+        dest: /opt/flutter
+        version: stable
+
+    - name: Add flutter dir to path 2/2
+      lineinfile:
+        dest: /etc/bash.bashrc
+        line: export PATH=$PATH:/opt/flutter/bin/
+        owner: root
+
+    - name: downloard flutter precache
+      command: /opt/flutter/bin/flutter precache
