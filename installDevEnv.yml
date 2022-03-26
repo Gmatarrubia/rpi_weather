@@ -26,11 +26,16 @@
         dest: /opt/flutter
         version: stable
 
+    - name: Register a variable, ignore errors and continue
+      command: grep -c flutter /etc/bash.bashrc
+      register: result
+      ignore_errors: true
     - name: Add flutter dir to path 2/2
+      when: result.stdout == "0"
       lineinfile:
         dest: /etc/bash.bashrc
         line: export PATH=$PATH:/opt/flutter/bin/
         owner: root
 
-    - name: downloard flutter precache
-      command: /opt/flutter/bin/flutter precache
+#    - name: downloard flutter precache
+#      command: /opt/flutter/bin/flutter precache
