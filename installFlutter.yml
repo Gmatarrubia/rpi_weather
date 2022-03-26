@@ -13,11 +13,13 @@
         dest: /opt/flutter
         version: stable
 
-    - name: download flutter precache
+    - name: Download flutter precache
       command: /opt/flutter/bin/flutter precache
-    - name: disable flutter analytics
+    - name: Disable flutter analytics
       command: /opt/flutter/bin/flutter config --no-analytics
-    - name: download flutter precache
+    - name: Download flutter precache
       command: /opt/flutter/bin/dart --disable-analytics
+    - name: Enable Flutter for linux
+      command: flutter config --enable-linux-desktop
 
 
