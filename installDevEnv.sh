@@ -6,7 +6,7 @@ function check_ansible(){
         echo "Ansible already installed"
     else
         echo "Installing ansible..."
-        apt install -y ansible
+        sudo apt install -y ansible
     fi
 }
 
