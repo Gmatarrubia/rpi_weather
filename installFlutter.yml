@@ -1,0 +1,23 @@
+---
+- name: Ansible playbook for installing the flutter
+  hosts: localhost
+  tasks:
+    - name: Check flutter resources
+      ansible.builtin.stat:
+        path: /opt/flutter/bin
+      register: p
+    - name: Get Flutter sources
+      when: not p.stat.exists
+      ansible.builtin.git:
+        repo: https://github.com/flutter/flutter.git
+        dest: /opt/flutter
+        version: stable
+
+    - name: download flutter precache
+      command: /opt/flutter/bin/flutter precache
+    - name: disable flutter analytics
+      command: /opt/flutter/bin/flutter config --no-analytics
+    - name: download flutter precache
+      command: /opt/flutter/bin/dart --disable-analytics
+
+

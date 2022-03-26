@@ -20,11 +20,16 @@
         - xz-utils
         install_recommends: no
 
-    - name: Get Flutter sources
-      ansible.builtin.git:
-        repo: https://github.com/flutter/flutter.git
-        dest: /opt/flutter
-        version: stable
+    - name: Check flutter resources
+      ansible.builtin.stat:
+        path: /opt/flutter/
+      register: p
+    - name: Set right permissions
+      when: not p.stat.exists
+      ansible.builtin.file:
+        path: /opt/flutter
+        state: directory
+        mode: 0777
 
     - name: Register a variable, ignore errors and continue
       command: grep -c flutter /etc/bash.bashrc
@@ -34,8 +39,6 @@
       when: result.stdout == "0"
       lineinfile:
         dest: /etc/bash.bashrc
-        line: export PATH=$PATH:/opt/flutter/bin/
+        line: export PATH=$PATH:/opt/flutter/bin
         owner: root
 
-#    - name: downloard flutter precache
-#      command: /opt/flutter/bin/flutter precache
