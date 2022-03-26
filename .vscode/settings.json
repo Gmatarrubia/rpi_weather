@@ -1,0 +1,26 @@
+{
+    "files.autoSave": "afterDelay",
+    "dart.flutterSdkPath": "/opt/flutter",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "dart.openDevTools": "flutter",
+    "workbench.startupEditor": "newUntitledFile",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "editor.minimap.enabled": false,
+    "git.confirmSync": false,
+    "task.problemMatchers.neverPrompt": {
+        "process": true
+    },
+    "editor.renderWhitespace": "trailing",
+}
