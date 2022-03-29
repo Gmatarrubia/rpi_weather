@@ -22,4 +22,6 @@
     - name: Enable Flutter for linux
       command: flutter config --enable-linux-desktop
 
-
+    - name: Enable and star vncserver in case of WSL
+      when: ansible_kernel.find('Microsoft') == -1
+      command: tigervncserver -xstartup /usr/bin/xterm -SecurityTypes None

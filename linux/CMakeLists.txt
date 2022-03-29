@@ -3,8 +3,8 @@ project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "rpi_weather")
 set(APPLICATION_ID "com.example.rpi_weather")
-set(DSIPLAY 172.28.208.1:0.0)
-set(LIBGL_ALWAYS_INDIRECT 1)
+set(DISPLAY :1)
+# set(LIBGL_ALWAYS_INDIRECT 1)
 cmake_policy(SET CMP0063 NEW)
 
 set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
