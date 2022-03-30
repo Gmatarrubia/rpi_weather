@@ -2,6 +2,9 @@
 - name: Ansible playbook for installing the flutter dev env
   hosts: localhost
   user: root
+  vars:
+      is_WSL: "{{ ansible_kernel.find('WSL') }}"
+
   tasks:
     - name: Run "apt-get update"
       apt:
@@ -35,12 +38,8 @@
         line: export PATH=$PATH:/opt/flutter/bin
         owner: root
 
-    - name: Enable and star vncserver in case of WSL
-      when: ansible_kernel.find('Microsoft') == -1
-      command: vncserver -SecurityTypes None :1
-
     - name: Set vncserver config
-      when: ansible_kernel.find('Microsoft') == -1
+      when: is_WSL != -1
       ansible.builtin.copy:
         dest: ~/.vnc/tightvncserver.conf
         content: |

@@ -1,6 +1,8 @@
 ---
 - name: Ansible playbook for installing the flutter
   hosts: localhost
+  vars:
+    is_WSL: "{{ ansible_kernel.find('WSL') }}"
   tasks:
     - name: Check flutter resources
       ansible.builtin.stat:
@@ -23,5 +25,5 @@
       command: flutter config --enable-linux-desktop
 
     - name: Enable and star vncserver in case of WSL
-      when: ansible_kernel.find('Microsoft') == -1
+      when: is_WSL != -1
       command: tigervncserver -xstartup /usr/bin/xterm -SecurityTypes None
