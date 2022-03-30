@@ -47,12 +47,12 @@ static void my_application_activate(GApplication* application) {
     gtk_window_set_title(window, "rpi_weather");
   }
 
-#ifdef DEBUG
+//#ifdef DEBUG
   gtk_window_set_default_size(window, 800, 480);
   gtk_widget_show(GTK_WIDGET(window));
-#else
-  gtk_window_fullscreen(GTK_WINDOW(window));
-#endif
+//#else
+//  gtk_window_fullscreen(GTK_WINDOW(window));
+//#endif
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);

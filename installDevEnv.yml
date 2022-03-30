@@ -37,11 +37,3 @@
         dest: /etc/bash.bashrc
         line: export PATH=$PATH:/opt/flutter/bin
         owner: root
-
-    - name: Set vncserver config
-      when: is_WSL != -1
-      ansible.builtin.copy:
-        dest: ~/.vnc/tightvncserver.conf
-        content: |
-          geometry = "800x480";
-          depth = 24;
