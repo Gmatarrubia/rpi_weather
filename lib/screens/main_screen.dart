@@ -24,7 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("Icono"),
-                Text("Separador"),
+                Divider(
+                  color: Colors.white,
+                  height: 100,
+                  thickness: 20,
+                ),
                 Text("Datos secundarios"),
               ],
             ),

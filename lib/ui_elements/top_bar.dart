@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rpi_weather/resources/ui_constants.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({ Key? key }) : super(key: key);
@@ -11,6 +12,7 @@ class TopBar extends StatelessWidget {
       children: const [
         Text(
           "Madrid",
+          style: kLocationStyle,
         ),
       ],
 

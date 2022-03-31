@@ -31,6 +31,9 @@ flutter:
   - family: nonito
     fonts:
       - asset: fonts/NunitoSans-Regular.ttf
+  - family: nonito-semibold
+    fonts:
+      - asset: fonts/NunitoSans-SemiBold.ttf
   - family: nonito-black
     fonts:
       - asset: fonts/NunitoSans-Black.ttf
