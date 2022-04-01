@@ -18,19 +18,30 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            TopBar(),
-            TimeWidget(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text("Icono"),
-                Divider(
-                  color: Colors.white,
-                  height: 100,
-                  thickness: 20,
-                ),
-                Text("Datos secundarios"),
-              ],
+            const Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
+              child: TopBar(),
+              ),
+            const Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: TimeWidget()),
+            Flexible(
+              flex: 2,
+              fit: FlexFit.tight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text("Icono"),
+                  Divider(
+                    color: Colors.white,
+                    height: 100,
+                    thickness: 20,
+                  ),
+                  Text("Datos secundarios"),
+                ],
+              ),
             ),
           ],
         ),

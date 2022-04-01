@@ -24,3 +24,6 @@ const kLocationStyle = TextStyle(
   color: kTextColor,
 );
 
+final kBoxStyle = BoxDecoration(
+  borderRadius: BorderRadius.circular(20),
+);
