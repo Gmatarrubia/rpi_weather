@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: BasicWeather()
                     ),
                     VerticalDivider(
-                      color: Colors.white,
+                      color: kTextColor,
                       thickness: 2,
                       indent: 25,
                       endIndent: 25,
