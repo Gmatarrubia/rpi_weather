@@ -5,6 +5,7 @@ const Color kTimeBackgroundColor = Color(0xFF90A4A3);
 const Color kWeatherBackgroundColor = Color(0xFF90A4A3);
 
 const Color kTextColor = Colors.white;
+const int kBoxBackgroundAlpha = 200;
 
 const kClockStyle = TextStyle(
   fontSize: 40.0,
@@ -26,4 +27,11 @@ const kLocationStyle = TextStyle(
 
 final kBoxStyle = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
+);
+
+const kBoxBackground = BoxDecoration(
+  image: DecorationImage(
+    image: AssetImage("images/fondo.jpg"),
+    fit: BoxFit.cover,
+  ),
 );
