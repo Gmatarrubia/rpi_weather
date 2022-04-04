@@ -18,6 +18,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   late TextEditingController _controllerText;
+  final FocusNode _locationFocus = FocusNode();
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
                       fit: FlexFit.loose,
                       child: TopBar(
                         controllerText: _controllerText,
+                        textFocus: _locationFocus,
                       ),
                     ),
                     const Flexible(

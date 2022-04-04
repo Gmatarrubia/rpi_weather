@@ -7,14 +7,15 @@ import '../providers/system_provider.dart';
 
 class TopBar extends StatefulWidget {
   final TextEditingController controllerText;
-  const TopBar({required this.controllerText, Key? key}) : super(key: key);
+  final FocusNode textFocus;
+  const TopBar(
+      {required this.controllerText, required this.textFocus, Key? key})
+      : super(key: key);
   @override
   State<TopBar> createState() => _TopBarState();
 }
 
 class _TopBarState extends State<TopBar> {
-  bool? enableEditionState = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,11 +39,18 @@ class _TopBarState extends State<TopBar> {
                   width: 350,
                   child: TextField(
                     controller: widget.controllerText,
+                    focusNode: widget.textFocus,
+                    style: kLocationStyle,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "",
                     ),
-                    style: kLocationStyle,
+                    onSubmitted: (String text) {
+                      setState(() {
+                        Provider.of<SystemProvider>(context, listen: false)
+                            .changeEditState();
+                      });
+                    },
                   ),
                 ),
               ],
@@ -55,16 +63,27 @@ class _TopBarState extends State<TopBar> {
             ),
             onPressed: () {
               setState(() {
-                Provider.of<SystemProvider>(context, listen: false).changeEditState();
-                enableEditionState = Provider.of<SystemProvider>(context, listen: false).getEditState();
+                Provider.of<SystemProvider>(context, listen: false)
+                    .changeEditState();
+                if (Provider.of<SystemProvider>(context, listen: false)
+                        .getEditState() == true) {
+                  FocusScope.of(context).requestFocus(widget.textFocus);
+                }
               });
             },
-            child: Icon(
-              Icons.edit,
-              size: 40.0,
-              color: enableEditionState! ? Colors.amberAccent : Colors.black,
+            child: Consumer<SystemProvider>(
+              builder: (context, systemProvider, child) {
+                bool? enableEditionState =
+                    systemProvider.systemModel.getEnableEditState();
+                return Icon(
+                  Icons.edit,
+                  size: 40.0,
+                  color:
+                      enableEditionState! ? Colors.amberAccent : Colors.black,
+                );
+              },
             ),
-          )
+          ),
         ],
       ),
     );
