@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
 import 'package:rpi_weather/models/system_model.dart';
 
+import '../providers/system_provider.dart';
+
 class TopBar extends StatefulWidget {
   final TextEditingController controllerText;
-  const TopBar({required this.controllerText, Key? key})
-      : super(key: key);
+  const TopBar({required this.controllerText, Key? key}) : super(key: key);
   @override
   State<TopBar> createState() => _TopBarState();
 }
 
 class _TopBarState extends State<TopBar> {
-  SystemModel model = SystemModel();
-  bool enableEditionState = false;
+  bool? enableEditionState = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +55,14 @@ class _TopBarState extends State<TopBar> {
             ),
             onPressed: () {
               setState(() {
-                enableEditionState
-                    ? enableEditionState = false
-                    : enableEditionState = true;
+                Provider.of<SystemProvider>(context, listen: false).changeEditState();
+                enableEditionState = Provider.of<SystemProvider>(context, listen: false).getEditState();
               });
             },
             child: Icon(
               Icons.edit,
               size: 40.0,
-              color: enableEditionState ? Colors.amberAccent : Colors.black,
+              color: enableEditionState! ? Colors.amberAccent : Colors.black,
             ),
           )
         ],

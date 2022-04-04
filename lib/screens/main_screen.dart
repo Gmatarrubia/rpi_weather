@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<SystemProvider>(
       create: (context) => SystemProvider(),
       child: Container(
         constraints: const BoxConstraints.expand(),
@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
                       flex: 1,
                       fit: FlexFit.loose,
                       child: TopBar(
-                        controllerText: _controllerText
+                        controllerText: _controllerText,
                       ),
                     ),
                     const Flexible(

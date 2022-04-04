@@ -3,7 +3,19 @@ class SystemModel {
   double temperature = 0.0;
   double humidity = 0.0;
   int wheaterValue = 0;
-  String location = "Madrid";
+  String location = "Enter location";
+
+  bool? getEnableEditState() {
+    return enableEditState;
+  }
+
+  changeEnableEditState() {
+    enableEditState = !enableEditState;
+  }
+
+  setLocation(String newLocation) {
+    location = newLocation;
+  }
 
   String? getLocation() {
     return location;
@@ -16,6 +28,6 @@ class SystemModel {
   SystemModel() {
     location = "Madrid";
   }
-  
+
   SystemModel.fromJson(Map json) : location = json['location'];
 }

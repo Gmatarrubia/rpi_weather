@@ -4,38 +4,42 @@ import 'package:rpi_weather/models/system_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SystemProvider with ChangeNotifier {
+
+  SystemModel systemModel = SystemModel();
+
   SystemProvider() {
     initialState();
   }
-
-SystemModel? systemModel;
 
   void initialState() {
     syncDataWithProvider();
   }
 
+  void changeEditState() {
+    systemModel.changeEnableEditState();
+    notifyListeners();
+  }
+
+   bool? getEditState() {
+    return systemModel.getEnableEditState();
+  }
+
   void configureSystem(SystemModel _systemModel) {
-    if (systemModel == null) {
-      systemModel = _systemModel;
-      updateSharedPreferences();
-      //notifyListeners();
-    }
+    systemModel = _systemModel;
+    updateSharedPreferences();
+    //notifyListeners();
   }
 
   void updateSystemModel(SystemModel _systemModel) {
-    if (systemModel != null) {
-      systemModel = _systemModel;
-      updateSharedPreferences();
-      notifyListeners();
-    }
+    systemModel = _systemModel;
+    updateSharedPreferences();
+    notifyListeners();
   }
 
   void updateSharedPreferences() async {
-    if (systemModel != null) {
-      String mySystemModel = json.encode(systemModel!.toJson());
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('systemModel', mySystemModel);
-    }
+    String mySystemModel = json.encode(systemModel.toJson());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('systemModel', mySystemModel);
   }
 
   Future syncDataWithProvider() async {
