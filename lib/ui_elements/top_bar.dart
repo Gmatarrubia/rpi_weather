@@ -12,6 +12,13 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   SystemModel model = SystemModel();
   bool enableEditionState = false;
+  late TextEditingController _controllerText;
+
+  @override
+  void initState() {
+    _controllerText = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +39,16 @@ class _TopBarState extends State<TopBar> {
                   size: 40.0,
                   color: kTextColor,
                 ),
-                Text(
-                  model.location,
-                  style: kLocationStyle,
+                SizedBox(
+                  width: 180,
+                  child: TextField(
+                    controller: _controllerText,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Hey",
+                    ),
+                    style: kLocationStyle,
+                  ),
                 ),
               ],
             ),
@@ -60,5 +74,9 @@ class _TopBarState extends State<TopBar> {
         ],
       ),
     );
+  }
+
+  TextEditingController? getTextController() {
+    return _controllerText;
   }
 }

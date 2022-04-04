@@ -9,11 +9,13 @@ class SystemModel {
     return location;
   }
 
-  Map toJson () => {
-    'location' : location,
-  };
+  Map toJson() => {
+        'location': location,
+      };
 
-  SystemModel.fromJson( Map json ) :
-    location = json['location'];
-
+  SystemModel() {
+    location = "Madrid";
+  }
+  
+  SystemModel.fromJson(Map json) : location = json['location'];
 }
