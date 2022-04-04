@@ -16,7 +16,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final Widget myTopBar = const TopBar();
+
+  late TextEditingController _controllerText;
+
+  @override
+  void initState() {
+    _controllerText = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,9 @@ class _MainScreenState extends State<MainScreen> {
                     Flexible(
                       flex: 1,
                       fit: FlexFit.loose,
-                      child: myTopBar,
+                      child: TopBar(
+                        controllerText: _controllerText
+                      ),
                     ),
                     const Flexible(
                         flex: 1, fit: FlexFit.tight, child: TimeWidget()),
@@ -69,7 +78,9 @@ class _MainScreenState extends State<MainScreen> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Keyboard(),
+                  Keyboard(
+                    controllerText: _controllerText,
+                  ),
                 ],
               ),
             ],

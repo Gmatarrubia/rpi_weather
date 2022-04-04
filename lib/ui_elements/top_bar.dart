@@ -3,8 +3,9 @@ import 'package:rpi_weather/resources/ui_constants.dart';
 import 'package:rpi_weather/models/system_model.dart';
 
 class TopBar extends StatefulWidget {
-  const TopBar({Key? key}) : super(key: key);
-
+  final TextEditingController controllerText;
+  const TopBar({required this.controllerText, Key? key})
+      : super(key: key);
   @override
   State<TopBar> createState() => _TopBarState();
 }
@@ -12,13 +13,6 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   SystemModel model = SystemModel();
   bool enableEditionState = false;
-  late TextEditingController _controllerText;
-
-  @override
-  void initState() {
-    _controllerText = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +34,12 @@ class _TopBarState extends State<TopBar> {
                   color: kTextColor,
                 ),
                 SizedBox(
-                  width: 180,
+                  width: 350,
                   child: TextField(
-                    controller: _controllerText,
+                    controller: widget.controllerText,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: "Hey",
+                      labelText: "",
                     ),
                     style: kLocationStyle,
                   ),
@@ -74,9 +68,5 @@ class _TopBarState extends State<TopBar> {
         ],
       ),
     );
-  }
-
-  TextEditingController? getTextController() {
-    return _controllerText;
   }
 }
