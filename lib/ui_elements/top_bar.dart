@@ -16,6 +16,19 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
+  bool? isEditing = false;
+  @override
+  void initState() {
+    widget.textFocus.addListener(_onFocusChange);
+    super.initState();
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      isEditing = widget.textFocus.hasFocus;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,24 +48,26 @@ class _TopBarState extends State<TopBar> {
                   size: 40.0,
                   color: kTextColor,
                 ),
-                SizedBox(
-                  width: 350,
-                  child: TextField(
-                    controller: widget.controllerText,
-                    focusNode: widget.textFocus,
-                    style: kLocationStyle,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "",
+                Consumer<SystemProvider>(
+                    builder: (context, systemProvider, child) {
+                  return SizedBox(
+                    width: 350,
+                    child: TextField(
+                      controller: widget.controllerText,
+                      focusNode: widget.textFocus,
+                      style: kLocationStyle,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "",
+                      ),
+                      onSubmitted: (String text) {
+                        setState(() {
+                          systemProvider.changeEditState();
+                        });
+                      },
                     ),
-                    onSubmitted: (String text) {
-                      setState(() {
-                        Provider.of<SystemProvider>(context, listen: false)
-                            .changeEditState();
-                      });
-                    },
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),
@@ -60,28 +75,26 @@ class _TopBarState extends State<TopBar> {
             style: ElevatedButton.styleFrom(
               primary: Colors.transparent,
               shadowColor: Colors.transparent,
+              shape: const CircleBorder(side: BorderSide()),
             ),
             onPressed: () {
               setState(() {
                 Provider.of<SystemProvider>(context, listen: false)
                     .changeEditState();
                 if (Provider.of<SystemProvider>(context, listen: false)
-                        .getEditState() == true) {
+                        .getEditState() ==
+                    true) {
                   FocusScope.of(context).requestFocus(widget.textFocus);
                 }
               });
             },
-            child: Consumer<SystemProvider>(
-              builder: (context, systemProvider, child) {
-                bool? enableEditionState =
-                    systemProvider.systemModel.getEnableEditState();
-                return Icon(
-                  Icons.edit,
-                  size: 40.0,
-                  color:
-                      enableEditionState! ? Colors.amberAccent : Colors.black,
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Icon(
+                isEditing! ? Icons.done : Icons.edit,
+                size: 40.0,
+                color: isEditing! ? const Color(0xFF0B3D66) : Colors.black,
+              ),
             ),
           ),
         ],

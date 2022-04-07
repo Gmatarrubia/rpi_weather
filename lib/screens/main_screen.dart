@@ -16,10 +16,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   late TextEditingController _controllerText;
   final FocusNode _locationFocus = FocusNode();
-
+  bool? isEditEnable = false;
   @override
   void initState() {
     _controllerText = TextEditingController();
@@ -49,8 +48,11 @@ class _MainScreenState extends State<MainScreen> {
                         textFocus: _locationFocus,
                       ),
                     ),
-                    const Flexible(
-                        flex: 1, fit: FlexFit.tight, child: TimeWidget()),
+                    Flexible(
+                        flex: 1,
+                        fit: FlexFit.tight,
+                        child: TimeWidget()
+                    ),
                     Flexible(
                       flex: 2,
                       fit: FlexFit.tight,
@@ -82,6 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   Keyboard(
                     controllerText: _controllerText,
+                    focus: _locationFocus,
                   ),
                 ],
               ),

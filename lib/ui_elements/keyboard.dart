@@ -6,13 +6,29 @@ import 'package:rpi_weather/providers/system_provider.dart';
 
 class Keyboard extends StatefulWidget {
   final TextEditingController controllerText;
-  const Keyboard({required this.controllerText, Key? key}) : super(key: key);
+  final FocusNode focus;
+  const Keyboard(
+      {required this.controllerText, required this.focus, Key? key})
+      : super(key: key);
 
   @override
   State<Keyboard> createState() => _KeyboardState();
 }
 
 class _KeyboardState extends State<Keyboard> {
+  bool? showKeyboard = false;
+  @override
+  void initState() {
+    widget.focus.addListener(_onFocusChange);
+    super.initState();
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      showKeyboard = widget.focus.hasFocus;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SystemProvider>(builder: (context, systemProvider, child) {
