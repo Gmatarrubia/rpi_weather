@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
 
 class InfoWeather extends StatelessWidget {
-  const InfoWeather({
-    Key? key,
-  }) : super(key: key);
+  final double temperature;
+  final double humidity;
+  const InfoWeather(
+      {Key? key, required this.temperature, required this.humidity})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +17,34 @@ class InfoWeather extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const <Widget>[
-          Text(
-            "T: 10ºC",
-            style: kClockStyle,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "images/temperature.png",
+                width: 40.0,
+                height: 55.0,
+              ),
+              Text(
+                temperature.toString() + "ºC",
+                style: kClockStyle,
+              ),
+            ],
           ),
-          Text(
-            "H: 45%",
-            style: kClockStyle,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "images/humidity.png",
+                width: 55.0,
+                height: 55.0,
+              ),
+              Text(
+                humidity.toString() + "%",
+                style: kClockStyle,
+              ),
+            ],
           ),
         ],
       ),
