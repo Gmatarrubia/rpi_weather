@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
-import 'package:rpi_weather/models/system_model.dart';
 
 import '../providers/system_provider.dart';
 

@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
 import 'package:rpi_weather/services/time_service.dart';
 
-class TimeWidget extends StatefulWidget {
-  TimeWidget({Key? key}) : super(key: key);
+class TimeBar extends StatefulWidget {
+  const TimeBar({Key? key}) : super(key: key);
 
   @override
-  State<TimeWidget> createState() => _TimeWidgetState();
+  State<TimeBar> createState() => _TimeBarState();
 }
 
-class _TimeWidgetState extends State<TimeWidget> {
+class _TimeBarState extends State<TimeBar> {
   final TimeService _timeService = TimeService();
   String _clock = "";
   String _date = "";
 
+  // ignore: unused_field
   Timer? _timer;
 
   @override

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:rpi_weather/ui_elements/top_bar.dart';
-import 'package:rpi_weather/ui_elements/time_widget.dart';
-import 'package:rpi_weather/ui_elements/basic_weather.dart';
-import 'package:rpi_weather/ui_elements/info_weather.dart';
+import 'package:rpi_weather/ui_elements/time_bar.dart';
+import 'package:rpi_weather/ui_elements/weather_bar.dart';
 import 'package:rpi_weather/ui_elements/keyboard.dart';
 import 'package:rpi_weather/providers/system_provider.dart';
 
@@ -48,33 +47,15 @@ class _MainScreenState extends State<MainScreen> {
                         textFocus: _locationFocus,
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                         flex: 1,
                         fit: FlexFit.tight,
-                        child: TimeWidget()
+                        child: TimeBar()
                     ),
-                    Flexible(
+                    const Flexible(
                       flex: 2,
                       fit: FlexFit.tight,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const <Widget>[
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: BasicWeather()),
-                          VerticalDivider(
-                            color: kTextColor,
-                            thickness: 2,
-                            indent: 25,
-                            endIndent: 25,
-                          ),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: InfoWeather()),
-                        ],
-                      ),
+                      child: WeatherBar(),
                     ),
                   ],
                 ),
@@ -95,3 +76,5 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+
+

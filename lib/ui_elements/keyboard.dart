@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rpi_weather/resources/ui_constants.dart';
 import 'package:virtual_keyboard_2/virtual_keyboard_2.dart';
 import 'package:rpi_weather/providers/system_provider.dart';
 
