@@ -12,21 +12,23 @@ class TimeWidget extends StatefulWidget {
 
 class _TimeWidgetState extends State<TimeWidget> {
   final TimeService _timeService = TimeService();
-  late Future<DateTime> _currentTime;
+  String _clock = "";
+  String _date = "";
 
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _currentTime = _timeService.getCurrentTime();
+
+    ///    _currentTime = await _timeService.getCurrentTime();
     _timer = Timer.periodic(const Duration(seconds: 1), updateTime);
   }
 
-  void updateTime(Timer timer) {
-    setState(() {
-      _currentTime = _timeService.getCurrentTime();
-    });
+  void updateTime(Timer timer) async {
+    _clock = await _timeService.getCurrentHour();
+    _date = await _timeService.getCurrentDate();
+    setState(() {});
   }
 
   @override
@@ -43,16 +45,16 @@ class _TimeWidgetState extends State<TimeWidget> {
             flex: 4,
             fit: FlexFit.tight,
             child: Text(
-              "$_currentTime",
+              _clock,
               style: kClockStyle,
               textAlign: TextAlign.center,
             ),
           ),
-          const Flexible(
+          Flexible(
             flex: 4,
             fit: FlexFit.tight,
             child: Text(
-              "Jueves 24 de Abril de 2022",
+              _date,
               style: kDateStyle,
               textAlign: TextAlign.center,
             ),

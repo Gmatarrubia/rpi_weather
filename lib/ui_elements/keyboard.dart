@@ -7,8 +7,7 @@ import 'package:rpi_weather/providers/system_provider.dart';
 class Keyboard extends StatefulWidget {
   final TextEditingController controllerText;
   final FocusNode focus;
-  const Keyboard(
-      {required this.controllerText, required this.focus, Key? key})
+  const Keyboard({required this.controllerText, required this.focus, Key? key})
       : super(key: key);
 
   @override
