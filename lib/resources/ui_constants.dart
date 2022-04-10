@@ -8,7 +8,7 @@ const Color kTextColor = Color.fromARGB(255, 27, 27, 27);
 const int kBoxBackgroundAlpha = 200;
 
 const kClockStyle = TextStyle(
-  fontSize: 40.0,
+  fontSize: 45.0,
   fontFamily: 'nonito-semibold',
   color: kTextColor,
 );
@@ -18,6 +18,8 @@ const kDateStyle = TextStyle(
   fontFamily: 'nonito',
   color: kTextColor,
 );
+
+const kColorWeatherBox = Color.fromARGB(255, 231, 229, 210);
 
 const kLocationStyle = TextStyle(
   fontSize: 40.0,

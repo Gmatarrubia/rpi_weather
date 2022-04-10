@@ -12,7 +12,7 @@ class BasicWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: kBoxStyle.copyWith(
-          color: Colors.lightBlueAccent.withAlpha(kBoxBackgroundAlpha)),
+          color: kColorWeatherBox.withAlpha(kBoxBackgroundAlpha)),
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

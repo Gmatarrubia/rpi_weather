@@ -12,7 +12,7 @@ class InfoWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: kBoxStyle.copyWith(
-          color: Colors.brown.withAlpha(kBoxBackgroundAlpha)),
+          color: kColorWeatherBox.withAlpha(kBoxBackgroundAlpha)),
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
