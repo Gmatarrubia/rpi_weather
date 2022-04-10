@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
 
 class BasicWeather extends StatelessWidget {
-  const BasicWeather({
-    Key? key,
-  }) : super(key: key);
+  final String weatherDescription;
+  final int wheaterValue;
+  const BasicWeather({Key? key,
+   required this.weatherDescription,
+   required this.wheaterValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +18,8 @@ class BasicWeather extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
-          Flexible(
+        children: <Widget>[
+          const Flexible(
             flex: 1,
             child: Image(
               image: AssetImage("images/icono.png"),
@@ -25,7 +28,7 @@ class BasicWeather extends StatelessWidget {
           Flexible(
             flex: 1,
             child: Text(
-              "Parciamente Nublado",
+              weatherDescription,
               style: kClockStyle,
               textAlign: TextAlign.center,
             ),

@@ -21,8 +21,6 @@ class _TimeBarState extends State<TimeBar> {
   @override
   void initState() {
     super.initState();
-
-    ///    _currentTime = await _timeService.getCurrentTime();
     _timer = Timer.periodic(const Duration(seconds: 1), updateTime);
   }
 

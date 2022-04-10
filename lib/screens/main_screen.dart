@@ -15,19 +15,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  late TextEditingController _controllerText;
+  final TextEditingController _controllerText = TextEditingController();
   final FocusNode _locationFocus = FocusNode();
-  bool? isEditEnable = false;
-  @override
-  void initState() {
-    _controllerText = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SystemProvider>(
-      create: (context) => SystemProvider(),
+      create: (context) => SystemProvider(_controllerText),
       child: Container(
         constraints: const BoxConstraints.expand(),
         decoration: kBoxBackground,

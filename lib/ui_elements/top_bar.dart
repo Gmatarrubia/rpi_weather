@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
-import 'package:rpi_weather/models/system_model.dart';
-import '../providers/system_provider.dart';
+import 'package:rpi_weather/providers/system_provider.dart';
 
 class TopBar extends StatefulWidget {
   final TextEditingController controllerText;
   final FocusNode textFocus;
+
   const TopBar(
       {required this.controllerText, required this.textFocus, Key? key})
       : super(key: key);
@@ -61,10 +61,13 @@ class _TopBarState extends State<TopBar> {
                       ),
                       onSubmitted: (String text) {
                         setState(() {
-                          systemProvider.changeEditState();
-                          var model = SystemModel();
-                          model.setLocation(text);
-                          systemProvider.updateSystemModel(model);
+                          systemProvider.setLocation(text);
+                          if (Provider.of<SystemProvider>(context,
+                                      listen: false)
+                                  .getEditState() ==
+                              true) {
+                            systemProvider.changeEditState();
+                          }
                         });
                       },
                     ),
@@ -73,32 +76,34 @@ class _TopBarState extends State<TopBar> {
               ],
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: const CircleBorder(side: BorderSide()),
-            ),
-            onPressed: () {
-              setState(() {
-                Provider.of<SystemProvider>(context, listen: false)
-                    .changeEditState();
-                if (Provider.of<SystemProvider>(context, listen: false)
-                        .getEditState() ==
-                    true) {
-                  FocusScope.of(context).requestFocus(widget.textFocus);
-                }
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Icon(
-                isEditing! ? Icons.done : Icons.edit,
-                size: 40.0,
-                color: isEditing! ? const Color(0xFF0B3D66) : Colors.black,
+          Consumer<SystemProvider>(builder: (context, systemProvider, child) {
+            return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: const CircleBorder(side: BorderSide()),
               ),
-            ),
-          ),
+              onPressed: () {
+                setState(() {
+                  systemProvider.changeEditState();
+                  if (systemProvider.getEditState() == true) {
+                    FocusScope.of(context).requestFocus(widget.textFocus);
+                  }
+                  else {
+                    systemProvider.setLocation(widget.controllerText.text);
+                  }
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Icon(
+                  isEditing! ? Icons.done : Icons.edit,
+                  size: 40.0,
+                  color: isEditing! ? const Color(0xFF0B3D66) : Colors.black,
+                ),
+              ),
+            );
+          }),
         ],
       ),
     );
