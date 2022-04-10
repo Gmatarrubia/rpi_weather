@@ -3,7 +3,7 @@ import 'package:rpi_weather/resources/ui_constants.dart';
 
 class InfoWeather extends StatelessWidget {
   final double temperature;
-  final double humidity;
+  final int humidity;
   const InfoWeather(
       {Key? key, required this.temperature, required this.humidity})
       : super(key: key);

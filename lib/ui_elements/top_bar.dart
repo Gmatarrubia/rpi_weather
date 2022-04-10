@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rpi_weather/resources/ui_constants.dart';
-
+import 'package:rpi_weather/models/system_model.dart';
 import '../providers/system_provider.dart';
 
 class TopBar extends StatefulWidget {
@@ -62,6 +62,9 @@ class _TopBarState extends State<TopBar> {
                       onSubmitted: (String text) {
                         setState(() {
                           systemProvider.changeEditState();
+                          var model = SystemModel();
+                          model.setLocation(text);
+                          systemProvider.updateSystemModel(model);
                         });
                       },
                     ),

@@ -4,7 +4,6 @@ import 'package:rpi_weather/models/system_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SystemProvider with ChangeNotifier {
-
   SystemModel systemModel = SystemModel();
 
   SystemProvider() {
@@ -20,8 +19,12 @@ class SystemProvider with ChangeNotifier {
     notifyListeners();
   }
 
-   bool? getEditState() {
+  bool? getEditState() {
     return systemModel.getEnableEditState();
+  }
+
+  String? getLocation() {
+    return systemModel.getLocation();
   }
 
   void configureSystem(SystemModel _systemModel) {
