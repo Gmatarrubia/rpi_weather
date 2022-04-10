@@ -34,7 +34,7 @@ class _TimeBarState extends State<TimeBar> {
   Widget build(BuildContext context) {
     return Container(
       decoration: kBoxStyle.copyWith(
-          color: Colors.deepOrangeAccent.withAlpha(kBoxBackgroundAlpha)),
+          color: const Color.fromARGB(255, 233, 191, 26).withAlpha(kBoxBackgroundAlpha)),
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Row(
         mainAxisSize: MainAxisSize.max,

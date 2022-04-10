@@ -32,7 +32,7 @@ class _TopBarState extends State<TopBar> {
   Widget build(BuildContext context) {
     return Container(
       decoration: kBoxStyle.copyWith(
-        color: Colors.lightBlueAccent.withAlpha(kBoxBackgroundAlpha),
+        color: Color.fromARGB(255, 233, 191, 26).withAlpha(kBoxBackgroundAlpha),
       ),
       margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
       child: Stack(

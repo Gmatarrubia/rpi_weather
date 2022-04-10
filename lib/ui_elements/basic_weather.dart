@@ -3,10 +3,9 @@ import 'package:rpi_weather/resources/ui_constants.dart';
 
 class BasicWeather extends StatelessWidget {
   final String weatherDescription;
-  final int wheaterValue;
-  const BasicWeather({Key? key,
-   required this.weatherDescription,
-   required this.wheaterValue})
+  final String iconUrl;
+  const BasicWeather(
+      {Key? key, required this.weatherDescription, required this.iconUrl})
       : super(key: key);
 
   @override
@@ -19,11 +18,9 @@ class BasicWeather extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Flexible(
+          Flexible(
             flex: 1,
-            child: Image(
-              image: AssetImage("images/icono.png"),
-            ),
+            child: loadImage(iconUrl),
           ),
           Flexible(
             flex: 1,
@@ -36,5 +33,13 @@ class BasicWeather extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Image loadImage(String iconURL) {
+    if (iconUrl.isEmpty) {
+      return const Image(image: AssetImage("images/icono.png"));
+    } else {
+      return Image.network(iconUrl);
+    }
   }
 }

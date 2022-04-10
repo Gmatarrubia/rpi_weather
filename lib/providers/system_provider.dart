@@ -34,6 +34,10 @@ class SystemProvider with ChangeNotifier {
     return systemModel.getEnableEditState();
   }
 
+  String? getWeatherUrl() {
+    return WeatherService().getWeatherIcon(systemModel.iconValue);
+  }
+
   String? getLocation() {
     return systemModel.getLocation();
   }

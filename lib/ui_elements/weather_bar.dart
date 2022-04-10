@@ -20,7 +20,7 @@ class WeatherBar extends StatelessWidget {
             flex: 1,
             fit: FlexFit.tight,
             child: BasicWeather(
-              wheaterValue: systemProvider.systemModel.weatherValue,
+              iconUrl: systemProvider.getWeatherUrl()!,
               weatherDescription: systemProvider.systemModel.weatherDescription,
             )),
           const VerticalDivider(
