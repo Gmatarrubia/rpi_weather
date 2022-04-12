@@ -5,9 +5,12 @@ const apiKey = '3dca52a1fe2b1b18871d9c0c173fb68c';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherService {
-  void setWeatherDataInModel(SystemModel model) async {
-    var weatherData = await getCityWeather(model.getLocation()!);
-    model.setWeatherData(weatherData);
+  Future<SystemModel> setWeatherDataInModel(SystemModel model) async {
+    if (model.getLocation()!.isNotEmpty) {
+      var weatherData = await getCityWeather(model.getLocation()!);
+      model.setWeatherData(weatherData);
+    }
+    return model;
   }
 
   Future<dynamic> getCityWeather(String cityName) async {
