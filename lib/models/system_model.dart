@@ -27,12 +27,14 @@ class SystemModel {
   }
 
   setWeatherData(dynamic weatherData) {
-    temperature = weatherData['main']['temp'];
-    humidity = weatherData['main']['humidity'];
-    weatherValue = weatherData['weather'][0]['id'];
-    iconValue = weatherData['weather'][0]['icon'];
-    weatherDescription = weatherData['weather'][0]['description'];
-    weatherDescription = toBeginningOfSentenceCase(weatherDescription)!;
+    if (weatherData != null) {
+      temperature = weatherData['main']['temp'];
+      humidity = weatherData['main']['humidity'];
+      weatherValue = weatherData['weather'][0]['id'];
+      iconValue = weatherData['weather'][0]['icon'];
+      weatherDescription = weatherData['weather'][0]['description'];
+      weatherDescription = toBeginningOfSentenceCase(weatherDescription)!;
+    }
   }
 
   Map toJson() => {
