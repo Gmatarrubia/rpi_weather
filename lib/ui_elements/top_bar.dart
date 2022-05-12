@@ -91,6 +91,7 @@ class _TopBarState extends State<TopBar> {
                   }
                   else {
                     systemProvider.setLocation(widget.controllerText.text);
+                    FocusScope.of(context).unfocus();
                   }
                 });
               },
