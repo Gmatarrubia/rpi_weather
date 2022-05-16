@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# This script is the entry point for the docker container.
+# It will add the host machine's user to the dockern and then execute userentry.sh
+
+if (grep -s -q "^$USER:" /etc/passwd); then
+    echo "found $USER in docker container"
+else
+    echo "adding host machine user $USER ($UID) to docker container"
+    grep -s -q ":$GID:" /etc/group || groupadd -g "$GID" "$GROUP"
+    useradd -d /flutter -u "$UID" -g "$GID" "$USER"
+    echo "$USER:$USER" | chpasswd
+fi
+
+# Allow sudo without password
+echo "$USER ALL=(root) NOPASSWD: /usr/bin/ansible-playbook *" >> /etc/sudoers
+
+export PATH=/flutter:${PATH}
+
+if [ -z "$(which tightvncserver)" ]
+then
+    sudo --user="${USER}" /flutter/installDevEnv.sh
+fi
+
+mkdir -p ./sources
+chown -R "${USER}:${USER}" ./sources
+chmod -R 755 ./sources
+
+# Check if it's needed to init flutter devEnv
+if [ ! -d ./sources/bin ]
+then
+    sudo --user="${USER}" /flutter/getSources.sh
+fi
+
+# preserve sanctioned env vars for all users within the docker instance
+if [ $# -eq 0 ]
+then
+    exec sudo --user="${USER}" /bin/bash
+else
+    exec sudo --user="${USER}" "$@"
+fi
