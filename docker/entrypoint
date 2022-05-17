@@ -17,7 +17,7 @@ echo "$USER ALL=(root) NOPASSWD: /usr/bin/ansible-playbook *" >> /etc/sudoers
 
 export PATH=/flutter:${PATH}
 
-if [ -z "$(which tightvncserver)" ]
+if [ -z "$(which tigervncserver)" ]
 then
     sudo --user="${USER}" /flutter/installDevEnv.sh
 fi
