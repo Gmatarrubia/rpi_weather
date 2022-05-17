@@ -1,6 +1,6 @@
 {
     "files.autoSave": "afterDelay",
-    "dart.flutterSdkPath": "./sources/flutter",
+    "dart.flutterSdkPath": "./sources/",
     "[dart]": {
         "editor.formatOnSave": true,
         "editor.formatOnType": true,
