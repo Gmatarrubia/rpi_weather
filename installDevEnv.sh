@@ -10,8 +10,9 @@ source ./checkFunctions.sh
 ## Script entry
 if [ -z "${INSIDE_DOCKER}" ]
 then
-    echo "Not needed vscode inside docker. Skiping!"
     check_vscode
+else
+    echo "Not needed vscode inside docker. Skiping!"
 fi
 check_ansible
 
