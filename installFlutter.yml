@@ -6,23 +6,23 @@
   tasks:
     - name: Check flutter resources
       ansible.builtin.stat:
-        path: ./sources/bin/flutter
+        path: /opt/flutter/bin/flutter
       register: p
     - name: Get Flutter sources
       when: not p.stat.exists
       ansible.builtin.git:
         repo: https://github.com/flutter/flutter.git
-        dest: ./sources
+        dest: /opt/flutter/
         version: 2.10.5
 
     - name: Download flutter precache
-      command: ./sources/bin/flutter precache
+      command: /opt/flutter/bin/flutter precache
     - name: Disable flutter analytics
-      command: ./sources/bin/flutter config --no-analytics
+      command: /opt/flutter/bin/flutter config --no-analytics
     - name: Download flutter precache
-      command: ./sources/bin/dart --disable-analytics
+      command: /opt/flutter/bin/dart --disable-analytics
     - name: Enable Flutter for linux
-      command: ./sources/bin/flutter config --enable-linux-desktop
+      command: /opt/flutter/bin/flutter config --enable-linux-desktop
 
     - name: Debug
       ansible.builtin.debug:

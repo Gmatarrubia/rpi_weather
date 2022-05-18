@@ -32,8 +32,8 @@ fi
 
 if [ -z "${__cmd[*]}" ]
 then
-    ./sources/bin/flutter pub get
-    time ./sources/bin/flutter build linux
+    /opt/flutter/flutter pub get
+    time /opt/flutter/flutter build linux
 else
     echo "Executing command: ${__cmd[*]}"
     time "${__cmd[@]}"

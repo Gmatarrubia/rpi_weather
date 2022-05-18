@@ -22,12 +22,12 @@ then
     sudo --user="${USER}" /flutter/installDevEnv.sh
 fi
 
-mkdir -p ./sources
-chown -R "${USER}:${USER}" ./sources
-chmod -R 755 ./sources
+mkdir -p /opt/flutter
+chown -R "${USER}:${USER}" /opt/flutter
+chmod -R 755 /opt/flutter
 
 # Check if it's needed to init flutter devEnv
-if [ ! -d ./sources/bin ]
+if [ ! -d /opt/flutter/bin ]
 then
     sudo --user="${USER}" /flutter/getSources.sh
 fi

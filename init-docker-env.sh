@@ -24,10 +24,13 @@ then
     "${repoPath}"/docker/dockerbuild.sh
 fi
 
+docker volume create flutter-sdk
+
 docker run \
     -it --rm \
     --privileged \
     --name flutterenv \
+    --mount source=flutter-sdk,target=/opt \
     --volume "${repoPath}":/flutter \
     --env USER="$user" \
     --env UID="$uid" \
