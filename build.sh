@@ -22,7 +22,7 @@ while (( $# )); do
 done
 
 # Check if sources were downloaded
-if [ ! -d "${repoPath}/sources" ]
+if [ ! -d "/opt/flutter/bin" ]
 then
     "${repoPath}"/getSources.sh
 fi
@@ -32,8 +32,8 @@ fi
 
 if [ -z "${__cmd[*]}" ]
 then
-    /opt/flutter/flutter pub get
-    time /opt/flutter/flutter build linux
+    /opt/flutter/bin/flutter pub get
+    time /opt/flutter/bin/flutter build linux
 else
     echo "Executing command: ${__cmd[*]}"
     time "${__cmd[@]}"

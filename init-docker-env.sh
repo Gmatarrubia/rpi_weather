@@ -24,7 +24,12 @@ then
     "${repoPath}"/docker/dockerbuild.sh
 fi
 
-docker volume create flutter-sdk
+exists_docker_volume=$(docker volume ls | grep -c flutter-sdk)
+
+if [ "${exists_docker_volume}" -gt 0 ]
+then
+    docker volume create flutter-sdk
+fi
 
 docker run \
     -it --rm \

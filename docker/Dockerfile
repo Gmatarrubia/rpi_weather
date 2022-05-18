@@ -36,7 +36,9 @@ RUN apt -y update && \
         pkg-config \
         libgtk-3-dev \
         liblzma-dev \
-        tightvncserver
+        tigervnc-standalone-server \
+        tigervnc-xorg-extension \
+        tigervnc-viewer
 
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
