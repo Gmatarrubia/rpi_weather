@@ -17,6 +17,9 @@ pubspec.lock
 .vscode-server
 .ssh
 .gitconfig
+.cache
+.Xauthority
+.local
 
 # IntelliJ related
 *.iml
