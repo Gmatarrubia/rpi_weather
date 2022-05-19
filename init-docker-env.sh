@@ -9,6 +9,19 @@ __graphics_opts=()
 
 repoPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
+# Check if running under WSL distro
+if [ -n "${WSL_DISTRO_NAME}" ]
+then
+    # Check if docker daemon is running
+    is_docker_daemon_running="$(ps -a | grep -c dockerd)"
+    if [ "${is_docker_daemon_running}" -lt 1 ]
+    then
+        echo Docker daemon is not running.
+        echo run it with: sudo dockerd
+        exit 0
+    fi
+fi
+
 # Check if current user is in the docker group
 is_user_in_docker_group=$(id | grep -c docker)
 if [ "$is_user_in_docker_group" -eq 0 ]
