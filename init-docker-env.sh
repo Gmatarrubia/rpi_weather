@@ -5,6 +5,8 @@ export gid=$(id -g)
 export user=$(id -nu)
 export group=$(id -ng)
 
+__graphics_opts=()
+
 repoPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 # Check if current user is in the docker group
@@ -31,6 +33,24 @@ then
     docker volume create flutter-sdk
 fi
 
+xhost +local:docker
+
+gen_x11(){
+    local -n opts="$1"
+    if [ -n "${DISPLAY}" ]
+    then
+        local tmpxafile="/tmp/run-${uid}-${gid}-${DISPLAY//:/-}.Xauthority"
+        true > "$tmpxafile"
+        xauth extract "${tmpxafile}" "${DISPLAY}" || return 1
+        opts+=(--env "DISPLAY=${DSIPLAY}"
+               --env "XAUTHORITY=${2}"
+               --volume "${tmpxafile}:${2}:ro"
+               --volume "/tmp/.X11-unix:/tmp/.X11-unix")
+    fi
+}
+
+gen_x11 __graphics_opts "/flutter/.Xauthority"
+
 docker run \
     -it --rm \
     --privileged \
@@ -42,6 +62,7 @@ docker run \
     --env GROUP="$group" \
     --env GID="$gid" \
     --env INSIDE_DOCKER="1" \
+    "${__graphics_opts[@]}" \
     dev-env-flutter:latest \
     "${@}"
 
