@@ -46,8 +46,6 @@ then
     docker volume create flutter-sdk
 fi
 
-xhost +local:docker
-
 gen_x11(){
     local -n opts="$1"
     if [ -n "${DISPLAY}" ]
@@ -62,7 +60,12 @@ gen_x11(){
         echo "Exporting display ${DISPLAY}"
     fi
 }
-gen_x11 __graphics_opts "/flutter/.Xauthority"
+
+if [ -n "${DISPLAY}" ]
+then
+    xhost +local:docker
+    gen_x11 __graphics_opts "/flutter/.Xauthority"
+fi
 
 docker run \
     -it --rm \
