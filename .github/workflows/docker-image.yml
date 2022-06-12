@@ -1,0 +1,19 @@
+name: Flutter test in docker env
+
+on:
+  push:
+    branches: [ "test" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image and run the test
+      shell: 'script -q -e -c "bash {0}"'
+      run: bash ./init-docker-env.sh /flutter/build.sh --test

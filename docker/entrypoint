@@ -23,8 +23,8 @@ then
 fi
 
 mkdir -p /opt/flutter
-chown -R "${USER}:${USER}" /opt/flutter
-chmod -R 755 /opt/flutter
+chown -R "${USER}" /opt/flutter
+chmod -R 777 /opt/flutter
 
 # Check if it's needed to init flutter devEnv
 if [ ! -d /opt/flutter/bin ]
