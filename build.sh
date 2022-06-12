@@ -29,10 +29,9 @@ fi
 
 
 ###Enable option for only start
-
+/opt/flutter/bin/flutter pub get
 if [ -z "$__test" ]
 then
-    /opt/flutter/bin/flutter pub get
     time /opt/flutter/bin/flutter build linux
 else
     /opt/flutter/bin/flutter pub run build_runner build --delete-conflicting-outputs
