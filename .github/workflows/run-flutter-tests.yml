@@ -2,7 +2,7 @@ name: Flutter test in docker env
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
