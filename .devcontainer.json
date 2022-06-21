@@ -1,0 +1,49 @@
+{
+    "name": "dev-env-flutter",
+    "image": "dev-env-flutter:latest",
+    "initializeCommand": "bash -i docker/vscode/initialize.sh ${localWorkspaceFolder}",
+    "onCreateCommand": "bash docker/vscode/onCreate.sh",
+    "postCreateCommand": "bash docker/vscode/postCreate.sh",
+    "postStartCommand": "bash -i docker/vscode-entrypoint ${localEnv:DISPLAY}",
+    "containerUser": "gmatarrubia",
+    "workspaceFolder": "/flutter",
+    "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/flutter",
+    "runArgs": ["--privileged", "--ipc=host"],
+    "mounts": [
+      "type=bind,source=/tmp,target=/tmp",
+      "type=bind,source=/tmp/run.Xauthority,target=/tmp.Xauthority,consistency=cached",
+    ],
+    "containerEnv":
+    {
+      "USER": "${localEnv:USER}",
+      "UID": "${localEnv:UID}",
+      "GID": "${localEnv:GID}",
+      "GROUP": "${localEnv:GROUP}",
+      "DISPLAY": "${localEnv:DISPLAY}",
+      "XAUTHORITY": "/tmp/run.Xauthority",
+      "SHELL": "/bin/bash",
+    },
+    "remoteEnv":
+    {
+      "USER": "${localEnv:USER}",
+      "UID": "${localEnv:UID}",
+      "GID": "${localEnv:GID}",
+      "GROUP": "${localEnv:GROUP}",
+      "DISPLAY": "${localEnv:DISPLAY}",
+      "XAUTHORITY": "/tmp/run.Xauthority",
+      "SHELL": "/bin/bash",
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+			"mhutchie.git-graph",
+			"timonwong.shellcheck",
+			"moshfeu.compare-folders",
+			"redhat.ansible",
+			"Dart-Code.dart-code",
+			"Dart-Code.flutter",
+			"kisstkondoros.vscode-gutter-preview"
+		]
+      }
+    },
+  }

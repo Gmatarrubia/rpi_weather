@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# This script is the entry point for the docker container.
+# It will add the host machine's user to the dockern and then execute userentry.sh
+if [ $# -gt 1 ]
+then
+    DISPLAY=$1
+fi
+
+if [ "${DISPLAY}" ]
+then
+    xauth extract "/flutter/.Xauthority" "${DISPLAY}" 2> /dev/null
+fi
+
+export PATH=/flutter:/opt/flutter/bin:${PATH}
+
+# Check if it's needed to init flutter devEnv
+if [ ! -d /opt/flutter/bin ]
+then
+    /flutter/getSources.sh
+fi
+
+if [ -n "$(which flutter)" ]
+then
+    flutter doctor -v
+    flutter pub get
+fi
+
+exit 0
