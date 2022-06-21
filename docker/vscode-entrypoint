@@ -9,15 +9,21 @@ fi
 
 if [ "${DISPLAY}" ]
 then
-    xauth extract "/flutter/.Xauthority" "${DSIPLAY}" 2> /dev/null
+    xauth extract "/flutter/.Xauthority" "${DISPLAY}" 2> /dev/null
 fi
 
-export PATH=/flutter:${PATH}
+export PATH=/flutter:/opt/flutter/bin:${PATH}
 
 # Check if it's needed to init flutter devEnv
 if [ ! -d /opt/flutter/bin ]
 then
     /flutter/getSources.sh
+fi
+
+if [ -n "$(which flutter)" ]
+then
+    flutter doctor -v
+    flutter pub get
 fi
 
 exit 0

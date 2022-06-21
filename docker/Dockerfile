@@ -71,6 +71,7 @@ RUN echo "export GROUP=${GROUP}" >> /etc/bash.bashrc
 RUN mkdir -p /opt/flutter
 RUN chown -R "${USER}" /opt/flutter
 RUN chmod -R 777 /opt/flutter
+RUN echo "export PATH=/flutter:/opt/flutter/bin:${PATH}" >> /etc/bash.bashrc
 
 WORKDIR /flutter
 ENV HOME "/home/${USER}"

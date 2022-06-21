@@ -1,14 +1,18 @@
 {
     "name": "dev-env-flutter",
     "image": "dev-env-flutter:latest",
-    "initializeCommand": "bash -i docker/dockerbuild.sh",
+    "initializeCommand": "bash -i docker/vscode/initialize.sh ${localWorkspaceFolder}",
     "onCreateCommand": "bash docker/vscode/onCreate.sh",
     "postCreateCommand": "bash docker/vscode/postCreate.sh",
-    "postStartCommand": "bash -i docker/entrypoint ${localEnv:DISPLAY}",
+    "postStartCommand": "bash -i docker/vscode-entrypoint ${localEnv:DISPLAY}",
     "containerUser": "gmatarrubia",
     "workspaceFolder": "/flutter",
     "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/flutter",
     "runArgs": ["--privileged", "--ipc=host"],
+    "mounts": [
+      "type=bind,source=/tmp,target=/tmp",
+      "type=bind,source=/tmp/run.Xauthority,target=/tmp.Xauthority,consistency=cached",
+    ],
     "containerEnv":
     {
       "USER": "${localEnv:USER}",
@@ -16,7 +20,7 @@
       "GID": "${localEnv:GID}",
       "GROUP": "${localEnv:GROUP}",
       "DISPLAY": "${localEnv:DISPLAY}",
-      "XAUTHORITY": "/flutter/.Xauthority",
+      "XAUTHORITY": "/tmp/run.Xauthority",
       "SHELL": "/bin/bash",
     },
     "remoteEnv":
@@ -26,7 +30,7 @@
       "GID": "${localEnv:GID}",
       "GROUP": "${localEnv:GROUP}",
       "DISPLAY": "${localEnv:DISPLAY}",
-      "XAUTHORITY": "/yocto/.Xauthority",
+      "XAUTHORITY": "/tmp/run.Xauthority",
       "SHELL": "/bin/bash",
     },
     "customizations": {
