@@ -5,7 +5,7 @@
     "onCreateCommand": "bash docker/vscode/onCreate.sh",
     "postCreateCommand": "bash docker/vscode/postCreate.sh",
     "postStartCommand": "bash -i docker/vscode-entrypoint ${localEnv:DISPLAY}",
-    "containerUser": "gmatarrubia",
+    "containerUser": "${localEnv:USER}",
     "workspaceFolder": "/flutter",
     "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/flutter",
     "runArgs": ["--privileged", "--ipc=host"],

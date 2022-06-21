@@ -59,7 +59,7 @@ RUN dpkg-reconfigure locales && \
 
 RUN addgroup "${GROUP}" --gid "${GID}"
 RUN useradd -d /home/${USER} -u "${UID}" -g "${GID}" "${USER}"&& mkdir -p /home/${USER}
-RUN chown -R "${USER}:${USER}" /home/${USER}
+RUN chown -R "${USER}" /home/${USER}
 RUN "${USER}:${USER}" | chpasswd
 RUN echo "$USER ALL=(root) NOPASSWD: /usr/bin/ansible-playbook *" >> /etc/sudoers
 

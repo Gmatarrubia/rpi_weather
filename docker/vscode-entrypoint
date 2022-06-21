@@ -23,6 +23,7 @@ fi
 if [ -n "$(which flutter)" ]
 then
     flutter doctor -v
+    flutter config --enable-linux-desktop
     flutter pub get
 fi
 
