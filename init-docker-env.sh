@@ -10,7 +10,10 @@ __graphics_opts=()
 repoPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 source checkFunctions.sh
-check_docker
+if [ "$(check_docker)" == "1" ]
+then
+    exit 1
+fi
 
 # Check if running under WSL distro
 if [ -n "${WSL_DISTRO_NAME}" ]
@@ -23,16 +26,6 @@ then
         echo run it with: sudo dockerd
         exit 0
     fi
-fi
-
-# Check if current user is in the docker group
-is_user_in_docker_group=$(id | grep -c docker)
-if [ "$is_user_in_docker_group" -eq 0 ]
-then
-    echo "The user $user should have in docker group. Try this:"
-    echo "sudo usermod -aG docker $user"
-    echo "Reboot your system. Then, try it again!"
-    exit 1
 fi
 
 # Check if docker image was built
