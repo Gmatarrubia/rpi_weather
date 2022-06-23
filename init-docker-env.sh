@@ -10,7 +10,8 @@ __graphics_opts=()
 repoPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 source checkFunctions.sh
-if [ "$(check_docker)" == "1" ]
+check_docker
+if [ $? -eq 1 ]
 then
     exit 1
 fi

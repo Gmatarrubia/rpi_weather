@@ -64,12 +64,15 @@ function check_docker(){
     fi
     # Check if current user is in the docker group
     is_user_in_docker_group=$(id | grep -c docker)
-    if [ "$is_user_in_docker_group" -eq 0 ]
+    if [ "$is_user_in_docker_group" -eq 1 ]
     then
+        echo "User already added to docker group"
+    else
         echo "Adding user $user to docker group."
         echo "Sudo password needed."
         sudo usermod -aG docker "$user"
         echo "Reboot your system. Then, try it again!"
         return 1
     fi
+    return 0
 }
