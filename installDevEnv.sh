@@ -9,3 +9,9 @@ source ./checkFunctions.sh
 check_ansible
 
 sudo ansible-playbook installDevEnv.yml
+
+flutter_dir_owner=$(stat -c "%U" /opt/flutter/)
+if [ "${flutter_dir_owner}" != "${USER}" ]
+then
+    sudo chown "${USER}" /opt/flutter
+fi
