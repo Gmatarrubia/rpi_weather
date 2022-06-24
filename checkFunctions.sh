@@ -42,7 +42,7 @@ function check_vscode(){
     )
 
     # Install missing extensions
-    for ext in list_of_extensions[@]
+    for ext in "${list_of_extensions[@]}"
     do
         if [ "$(code --list-extensions | grep -c "${ext}")" -eq 0 ]
         then
