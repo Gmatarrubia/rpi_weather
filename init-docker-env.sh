@@ -71,6 +71,8 @@ docker run \
     --name flutterenv \
     --mount source=flutter-sdk,target=/opt \
     --volume "${repoPath}":/flutter \
+    --publish-all \
+    --network=host \
     --env USER="$user" \
     --env UID="$uid" \
     --env GROUP="$group" \

@@ -8,7 +8,7 @@
     "containerUser": "${localEnv:USER}",
     "workspaceFolder": "/flutter",
     "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/flutter",
-    "runArgs": ["--privileged", "--ipc=host"],
+    "runArgs": ["--privileged", "--ipc=host", "--network=host", "--publish-all"],
     "mounts": [
       "type=bind,source=/tmp,target=/tmp",
       "type=bind,source=/tmp/run.Xauthority,target=/tmp.Xauthority,consistency=cached",
