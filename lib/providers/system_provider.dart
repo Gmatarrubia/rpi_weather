@@ -42,6 +42,10 @@ class SystemProvider with ChangeNotifier {
     return systemModel.getLocation();
   }
 
+  int? getTimeZone() {
+    return systemModel.getTimeZone();
+  }
+
   void setLocation(String newLocation) async {
     systemModel.setLocation(newLocation);
     //Update controller text to capitalize it

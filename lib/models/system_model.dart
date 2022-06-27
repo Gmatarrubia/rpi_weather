@@ -9,6 +9,7 @@ class SystemModel {
   String iconValue = "";
   String weatherDescription = "";
   String location = "";
+  int timeZone = 0;
 
   bool? getEnableEditState() {
     return enableEditState;
@@ -26,6 +27,10 @@ class SystemModel {
     return toBeginningOfSentenceCase(location);
   }
 
+  int? getTimeZone() {
+    return timeZone;
+  }
+
   setWeatherData(dynamic weatherData) {
     if (weatherData != null) {
       temperature = weatherData['main']['temp'];
@@ -34,6 +39,7 @@ class SystemModel {
       iconValue = weatherData['weather'][0]['icon'];
       weatherDescription = weatherData['weather'][0]['description'];
       weatherDescription = toBeginningOfSentenceCase(weatherDescription)!;
+      timeZone = weatherData['timezone'] * 1000;
     }
   }
 

@@ -9,15 +9,17 @@ class TimeService {
     return await NTP.now(lookUpAddress: pool);
   }
 
-  Future<String> getCurrentDate() async {
+  Future<String> getCurrentDate({Duration? timezone}) async {
     DateTime now = await _getCurrentTime();
+    DateTime nowFix = now.toUtc().add(timezone!);
     return await initializeDateFormatting('es-ES', '')
-        .then((_) => DateFormat.yMMMMEEEEd('es-ES').format(now));
+        .then((_) => DateFormat.yMMMMEEEEd('es-ES').format(nowFix));
   }
 
-  Future<String> getCurrentHour() async {
+  Future<String> getCurrentHour({Duration? timezone}) async {
     DateTime now = await _getCurrentTime();
+    DateTime nowFix = now.toUtc().add(timezone!);
     return await initializeDateFormatting('es-ES', '')
-        .then((_) => DateFormat.Hm('es-ES').format(now));
+        .then((_) => DateFormat.Hm('es-ES').format(nowFix));
   }
 }
